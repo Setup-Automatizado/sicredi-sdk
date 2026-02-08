@@ -1,6 +1,6 @@
 {
   "name": "@setup-automatizado/sicredi-sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Production-grade TypeScript SDK for Sicredi PIX and Boleto Hibrido APIs",
   "author": "Guilherme Jansen <guilherme@setupautomatizado.com.br>",
   "license": "MIT",
