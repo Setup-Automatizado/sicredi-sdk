@@ -1,6 +1,8 @@
 # @setup-automatizado/sicredi-sdk
 
 [![npm version](https://img.shields.io/npm/v/@setup-automatizado/sicredi-sdk.svg)](https://www.npmjs.com/package/@setup-automatizado/sicredi-sdk)
+[![npm downloads](https://img.shields.io/npm/dm/@setup-automatizado/sicredi-sdk.svg)](https://www.npmjs.com/package/@setup-automatizado/sicredi-sdk)
+[![CI](https://github.com/setup-automatizado/sicredi-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/setup-automatizado/sicredi-sdk/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6+-3178c6.svg)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933.svg)](https://nodejs.org/)
