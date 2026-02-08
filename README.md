@@ -5,7 +5,8 @@
 [![CI](https://github.com/setup-automatizado/sicredi-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/setup-automatizado/sicredi-sdk/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6+-3178c6.svg)](https://www.typescriptlang.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933.svg)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20%2B-339933.svg)](https://nodejs.org/)
+[![Bun](https://img.shields.io/badge/Bun-1.0+-f9f1e1.svg)](https://bun.sh/)
 
 Production-grade TypeScript SDK for the Sicredi PIX and Boleto Hibrido APIs. Built for reliability and developer experience.
 
@@ -21,6 +22,12 @@ Production-grade TypeScript SDK for the Sicredi PIX and Boleto Hibrido APIs. Bui
 - **Boleto Hibrido** -- complete support for PIX charges with due dates, penalties, interest, and discounts
 - **Webhook handling** -- parse and validate Sicredi webhook callback payloads
 - **Lazy initialization** -- certificates and connections are set up on first use, not at construction
+
+## Requirements
+
+- **Node.js** >= 20.0.0 (LTS) or **Bun** >= 1.0
+- Node.js 20 (Maintenance LTS), 22 (Active LTS), and 24 (Active LTS) are supported
+- Node.js 18 reached End-of-Life in April 2025 and is **not supported**
 
 ## Installation
 
