@@ -13,6 +13,13 @@ coverage/
 .env.*
 !.env.example
 
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
 # OS
 .DS_Store
 Thumbs.db
@@ -22,9 +29,16 @@ Thumbs.db
 
 # Logs
 *.log
+npm-debug.log*
+
+# Lock files (using bun.lock)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Temporary
+tmp/
+.tmp/
 
 # Cache
 .cache/
-
-# npm lock (project uses bun.lock)
-package-lock.json
