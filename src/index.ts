@@ -1,124 +1,120 @@
 // Main client
 export { Sicredi } from './client';
-
-// Types
-export type { SicrediConfig, CertificateOptions } from './types/config';
-export type { TokenResponse, CachedToken } from './types/auth';
-export type { Violacao, BacenErrorResponse } from './types/error';
+// Errors
+export {
+  SicrediApiError,
+  SicrediAuthError,
+  SicrediCertificateError,
+  SicrediConnectionError,
+  SicrediError,
+  SicrediValidationError,
+} from './errors';
+export type { CachedToken, TokenResponse } from './types/auth';
 export type {
-  DevedorCpf,
-  DevedorCnpj,
-  Devedor,
-  PagadorCpf,
-  PagadorCnpj,
-  Pagador,
-  Recebedor,
-  Valor,
-  ValorComDesconto,
-  Calendario,
-  CalendarioVencimento,
-  InfoAdicional,
-  Paginacao,
-  PaginacaoParams,
-  Loc,
-  LocCompleta,
-  ComponentesValor,
-  SaqueTroco,
-  DevolucaoStatus,
-  DevolucaoNatureza,
-  DevolucaoSolicitadaNatureza,
-} from './types/common';
-export type {
-  CobStatus,
-  Devolucao,
-  PixPayment,
-  CreateCobRequest,
   CobResponse,
-  UpdateCobRequest,
+  CobStatus,
+  CreateCobRequest,
+  Devolucao,
   ListCobParams,
   ListCobResponse,
+  PixPayment,
+  UpdateCobRequest,
 } from './types/cob';
 export type {
-  CobvStatus,
-  DescontoDataFixa,
-  Desconto,
-  Juros,
-  Multa,
   Abatimento,
-  ValorCobv,
-  CreateCobvRequest,
   CobvResponse,
-  UpdateCobvRequest,
+  CobvStatus,
+  CreateCobvRequest,
+  Desconto,
+  DescontoDataFixa,
+  Juros,
   ListCobvParams,
   ListCobvResponse,
+  Multa,
+  UpdateCobvRequest,
+  ValorCobv,
 } from './types/cobv';
 export type {
-  WebhookConfigRequest,
-  WebhookResponse,
-  ListWebhookParams,
-  ListWebhookResponse,
-  WebhookDevolucao,
-  WebhookPixEntry,
-  WebhookCallbackPayload,
-} from './types/webhook';
+  Calendario,
+  CalendarioVencimento,
+  ComponentesValor,
+  Devedor,
+  DevedorCnpj,
+  DevedorCpf,
+  DevolucaoNatureza,
+  DevolucaoSolicitadaNatureza,
+  DevolucaoStatus,
+  InfoAdicional,
+  Loc,
+  LocCompleta,
+  Pagador,
+  PagadorCnpj,
+  PagadorCpf,
+  Paginacao,
+  PaginacaoParams,
+  Recebedor,
+  SaqueTroco,
+  Valor,
+  ValorComDesconto,
+} from './types/common';
+export {
+  isDevedorCnpj,
+  isDevedorCpf,
+  isPagadorCnpj,
+  isPagadorCpf,
+} from './types/common';
+// Types
+export type { CertificateOptions, SicrediConfig } from './types/config';
+export type { BacenErrorResponse, Violacao } from './types/error';
 export type {
-  PixRecebido,
+  CreateLocRequest,
+  ListLocParams,
+  ListLocResponse,
+  LocResponse,
+} from './types/loc';
+export type {
+  ListLoteCobvParams,
+  ListLoteCobvResponse,
+  LoteCobvCobSolicitado,
+  LoteCobvItemStatus,
+  LoteCobvPatchRequest,
+  LoteCobvRequest,
+  LoteCobvResponse,
+} from './types/lotecobv';
+export type {
   DevolucaoRequest,
   DevolucaoResponse,
   ListPixParams,
   ListPixResponse,
+  PixRecebido,
 } from './types/pix';
 export type {
-  LoteCobvItemStatus,
-  LoteCobvCobSolicitado,
-  LoteCobvRequest,
-  LoteCobvPatchRequest,
-  LoteCobvResponse,
-  ListLoteCobvParams,
-  ListLoteCobvResponse,
-} from './types/lotecobv';
-export type {
-  CreateLocRequest,
-  LocResponse,
-  ListLocParams,
-  ListLocResponse,
-} from './types/loc';
-
-// Errors
+  ListWebhookParams,
+  ListWebhookResponse,
+  WebhookCallbackPayload,
+  WebhookConfigRequest,
+  WebhookDevolucao,
+  WebhookPixEntry,
+  WebhookResponse,
+} from './types/webhook';
+export { SICREDI_ISPB, SICREDI_URLS } from './utils/constants';
 export {
-  SicrediError,
-  SicrediApiError,
-  SicrediAuthError,
-  SicrediValidationError,
-  SicrediConnectionError,
-  SicrediCertificateError,
-} from './errors';
-
+  createDateRange,
+  formatDateOnly,
+  parseDate,
+  toISOString,
+} from './utils/date';
+export { generateQrCodeDataUrl, generateQrCodeSvg } from './utils/qrcode';
 // Utilities
 export { generateTxId, isValidTxId } from './utils/txid';
-export {
-  isValidCpf,
-  isValidCnpj,
-  isValidPixKey,
-  detectPixKeyType,
-  isValidMonetaryValue,
-} from './utils/validators';
 export type { PixKeyType } from './utils/validators';
-export { generateQrCodeSvg, generateQrCodeDataUrl } from './utils/qrcode';
 export {
-  toISOString,
-  createDateRange,
-  parseDate,
-  formatDateOnly,
-} from './utils/date';
-export {
-  isDevedorCpf,
-  isDevedorCnpj,
-  isPagadorCpf,
-  isPagadorCnpj,
-} from './types/common';
-export { SICREDI_URLS, SICREDI_ISPB } from './utils/constants';
-
+  detectPixKeyType,
+  isValidCnpj,
+  isValidCpf,
+  isValidMonetaryValue,
+  isValidPixKey,
+} from './utils/validators';
+export type { WebhookParseResult } from './webhook-handler';
 // Webhook handler
 export { parseWebhookPayload } from './webhook-handler';
-export type { WebhookParseResult } from './webhook-handler';

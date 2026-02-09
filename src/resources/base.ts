@@ -1,6 +1,6 @@
 import type { AuthManager } from '../core/auth-manager';
 import type { HttpClient } from '../core/http-client';
-import { type RetryOptions, isRetryableStatusCode, withRetry } from '../core/retry';
+import { isRetryableStatusCode, type RetryOptions, withRetry } from '../core/retry';
 import { SicrediApiError } from '../errors/api-error';
 import { SicrediAuthError } from '../errors/auth-error';
 
