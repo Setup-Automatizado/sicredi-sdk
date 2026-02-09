@@ -1,0 +1,138 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  packages: write
+  id-token: write
+
+jobs:
+  ci:
+    name: CI (Node ${{ matrix.node-version }})
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18, 20, 22]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Type check
+        run: bun run typecheck
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Run tests
+        run: bun run test:coverage
+
+      - name: Build
+        run: bun run build
+
+      - name: Verify package exports
+        run: |
+          node -e "const pkg = require('./package.json'); console.log('Package:', pkg.name, pkg.version);"
+          test -f dist/index.js || (echo 'Missing dist/index.js' && exit 1)
+          test -f dist/index.cjs || (echo 'Missing dist/index.cjs' && exit 1)
+          test -f dist/index.d.ts || (echo 'Missing dist/index.d.ts' && exit 1)
+
+  release:
+    name: Release (npm)
+    needs: ci
+    if: github.repository == 'Setup-Automatizado/sicredi-sdk'
+    runs-on: ubuntu-latest
+
+    outputs:
+      new-release-published: ${{ steps.semantic.outputs.new_release_published }}
+      new-release-version: ${{ steps.semantic.outputs.new_release_version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun run build
+
+      - name: Semantic Release
+        id: semantic
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: bunx semantic-release
+
+  publish-gpr:
+    name: Publish (GitHub Packages)
+    needs: release
+    if: needs.release.outputs.new-release-published == 'true'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: v${{ needs.release.outputs.new-release-version }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://npm.pkg.github.com
+          scope: '@setup-automatizado'
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun run build
+
+      - name: Publish to GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
