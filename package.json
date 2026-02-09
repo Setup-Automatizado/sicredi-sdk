@@ -1,6 +1,6 @@
 {
   "name": "@setup-automatizado/sicredi-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Production-grade TypeScript SDK for Sicredi PIX and Boleto Hibrido APIs",
   "author": "Guilherme Jansen <guilherme@setupautomatizado.com.br>",
   "license": "MIT",
@@ -34,15 +34,28 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "prepublishOnly": "bun run build"
+    "prepublishOnly": "bun run build",
+    "prepare": "husky || true",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.0",
+    "@biomejs/biome": "^2.3.14",
+    "@commitlint/cli": "^20.4.1",
+    "@commitlint/config-conventional": "^20.4.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.5",
+    "@semantic-release/npm": "^13.1.4",
+    "@semantic-release/release-notes-generator": "^14.1.0",
     "@types/node": "^25.2.2",
-    "@vitest/coverage-v8": "^2.1.0",
-    "tsup": "^8.3.0",
-    "typescript": "^5.6.0",
-    "vitest": "^2.1.0"
+    "@vitest/coverage-v8": "^4.0.18",
+    "conventional-changelog-conventionalcommits": "^9.1.0",
+    "husky": "^9.1.7",
+    "semantic-release": "^25.0.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   },
   "keywords": [
     "sicredi",
@@ -60,9 +73,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/setup-automatizado/sicredi-sdk"
+    "url": "git+https://github.com/setup-automatizado/sicredi-sdk.git"
   },
+  "bugs": {
+    "url": "https://github.com/setup-automatizado/sicredi-sdk/issues"
+  },
+  "homepage": "https://github.com/setup-automatizado/sicredi-sdk#readme",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
